@@ -12,6 +12,7 @@ public class Runigram {
 
 		// Tests the reading and printing of an image:
 		morph(read("thor.ppm"), read("ironman.ppm"), 10);
+		
 		Color[][] tinypic = read("tinypic.ppm");
 		print(tinypic);
 
@@ -174,9 +175,9 @@ public class Runigram {
 	 * values in the two input color.
 	 */
 	public static Color blend(Color c1, Color c2, double alpha) {
-		int red = (int) (alpha * c1.getRed() + 1-alpha * c2.getRed());
-		int green = (int) (alpha * c1.getGreen() + 1-alpha * c2.getGreen());
-		int blue = (int) (alpha * c1.getBlue() + 1-alpha * c2.getBlue());
+		int red = (int) (alpha * c1.getRed() + (1-alpha) * c2.getRed());
+		int green = (int) (alpha * c1.getGreen() + (1-alpha) * c2.getGreen());
+		int blue = (int) (alpha * c1.getBlue() + (1-alpha) * c2.getBlue());
 		Color newC = new Color(red, green, blue);
 		return newC;
 	}
@@ -210,9 +211,9 @@ public class Runigram {
 		setCanvas(source);
 		int hight = source.length;
 		int lenght = source[0].length;
-		Color newImg[][] = scaled(target, hight, lenght);
+		Color newImg[][] = scaled(target, lenght, hight);
 		for (int i = 0; i <= n; i++) {
-			display(blend(source, newImg, ((double)(n-i)/(n))));
+			display(blend(source, newImg, ((double)(n-i)/n)));
 			StdDraw.pause(100);
 			}
 
